@@ -1,14 +1,22 @@
 import mongoose from "mongoose";
-const URI="mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce"
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import FileStore from "session-file-store"
 
+const URI = "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce";
 
-const connectToDB = () => {
+const connectToDB = async () => {
     try {
-        mongoose.connect(URI)
-        console.log("Base de datos conectada....")
+        await mongoose.connect(URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("Base de datos conectada....");
     } catch (error) {
         console.log(error);
     }
 };
 
-export default connectToDB
+export default connectToDB;
+
+
