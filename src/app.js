@@ -11,6 +11,7 @@ import routerV from './routers/views.router.js';
 //socket.io
 import socketProducts from "./listeners/socketProducts.js"
 import socketChat from './listeners/socketChat.js';
+import userRouter from './routers/user.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080
@@ -29,6 +30,7 @@ app.set("views",__dirname+"/views")
 app.use('/api/products', routerP)
 app.use('/api/carts', routerC)
 app.use('/', routerV);
+app.use('/api/sessions',userRouter)
 
 
 connectToDB()

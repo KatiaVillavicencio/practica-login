@@ -16,5 +16,8 @@
     "mongoose": "^7.6.3",
     "mongoose-paginate-v2": "^1.7.4",
     "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.20"
   }
 }
