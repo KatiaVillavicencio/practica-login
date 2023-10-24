@@ -1,13 +1,15 @@
 
 import { usersModel } from '../models/users.model.js' 
 
-class UserManager extends usersModel
+
+export default class UserManager 
+extends usersModel
 {
     constructor() {
         super();
     }
     
-      // Agrega un nuevo usuario
+      // Agregar
       async addUser(userData) 
       {
           try 
@@ -20,7 +22,7 @@ class UserManager extends usersModel
           }
         }
     
-      // Actualiza un usuario existente
+      // Actualizar
       async updateUser(id, userData) 
       {
         try 
@@ -40,7 +42,7 @@ class UserManager extends usersModel
         }
       }
     
-      // Obtiene todos los usuarios
+//Ver todos los usuarios
       async getUsers() 
       {
         try 
@@ -53,13 +55,12 @@ class UserManager extends usersModel
         }
       }
     
-      // Obtiene un usuario por ID
+      // Usuario por ID
       async getUserById(id) 
       {
         try 
         {
-          //La propiedad lean() arregla el error own properties que se muestra al momento de querer mostrar datos desde mongoose, ya que,
-          //viene con propiedades propias de mongoose y lean() se las quita para quedar solo el json
+      
           const user = await UserManager.findById(id).lean();    
           if (!user) 
           {
@@ -106,4 +107,3 @@ class UserManager extends usersModel
       }
       
 }
-export default UserManager;

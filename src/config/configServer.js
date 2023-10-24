@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-import session from "express-session";
-import MongoStore from "connect-mongo";
-import FileStore from "session-file-store"
+
 
 const URI = "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce";
 

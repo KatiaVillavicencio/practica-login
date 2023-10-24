@@ -5,7 +5,7 @@ import connectToDB from "./config/configServer.js"
 import {__dirname} from "./utils.js"
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import FileStore from "session-file-store"
+import cookieParser from 'cookie-parser';
 
 import routerP from './routers/products.router.js';
 import routerC from './routers/carts.router.js';
@@ -19,6 +19,7 @@ import userRouter from './routers/user.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080
+
 app.use(express.static(__dirname+"/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,13 +31,6 @@ app.set('view engine', 'handlebars');
 app.set("views",__dirname+"/views")
 
 
-//rutas
-app.use('/api/products', routerP)
-app.use('/api/carts', routerC)
-app.use('/', routerV);
-app.use('/api/sessions',userRouter)
-
-
 connectToDB()
 
 const httpServer=app.listen(PORT,()=>{
@@ -45,20 +39,25 @@ const httpServer=app.listen(PORT,()=>{
 //session login//
 app.use(
     session({
-        // Session registrada en mongo atlas
         store: MongoStore.create({
             mongoUrl: "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce",
-            mongoOptions: {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            },
-            ttl: 3600
+            mongoOptions:{
+            useNewUrlParser: true,
+            useUnifiedTopology: true},
+            ttl: 15
         }),
         secret: "ClaveSecreta",
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {maxAge: 15 * 60 * 1000}
     })
 );
+
+//rutas
+app.use('/api/products', routerP)
+app.use('/api/carts', routerC)
+app.use('/', routerV);
+app.use('/api/sessions',userRouter)
 
 
 //socket server
