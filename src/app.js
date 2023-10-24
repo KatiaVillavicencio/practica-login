@@ -14,7 +14,6 @@ import routerV from './routers/views.router.js';
 //socket.io
 import socketProducts from "./listeners/socketProducts.js"
 import socketChat from './listeners/socketChat.js';
-//sesion-login
 import userRouter from './routers/user.router.js';
 
 const app = express();
@@ -36,6 +35,8 @@ connectToDB()
 const httpServer=app.listen(PORT,()=>{
     console.log(`server escuchandoooo en ${PORT}`)
 })
+
+
 //session login//
 app.use(
     session({
@@ -49,7 +50,6 @@ app.use(
         secret: "ClaveSecreta",
         resave: false,
         saveUninitialized: false,
-        cookie: {maxAge: 15 * 60 * 1000}
     })
 );
 
@@ -70,11 +70,10 @@ socketChat(socketServer)
 //  })
 
 
-
 //Products view y login session//
 
-//Ingreso Products http://localhost:8080/products
-app.get("/products", async (req, res) => {
+//Ingreso Products  http:localhost:8080/products
+app.get("/api/products", async (req, res) => {
     if (!req.session.emailUsuario) 
     {
         return res.redirect("/login")

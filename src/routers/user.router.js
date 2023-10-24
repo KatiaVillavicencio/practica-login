@@ -5,7 +5,6 @@ const userRouter = Router()
 const user = new UserManager()
 
 
-
 userRouter.post("/register",(req, res) => {
     try 
     {
