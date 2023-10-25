@@ -65,15 +65,10 @@ const socketServer = new Server(httpServer)
 socketProducts(socketServer)
 socketChat(socketServer)
 
-//  socketServer.on('connection',socket=>{
-//     socketChat(socketServer,socket);
-//  })
-
-
 //Products view y login session//
 
 //Ingreso Products  http:localhost:8080/products
-app.get("/api/products", async (req, res) => {
+app.get("/products", async (req, res) => {
     if (!req.session.emailUsuario) 
     {
         return res.redirect("/login")

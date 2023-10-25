@@ -34,7 +34,7 @@ userRouter.post("/login", async (req, res) => {
             else{
                 req.session.emailUsuario = email
                 req.session.rolUsuario = data.rol
-                res.redirect("/products")
+                res.redirect("/api/products" )
             }
         
         }
